@@ -1,36 +1,54 @@
 typedef struct {
-        int index;
-        int *top;
+        int f;
+        int r;
+        int *arr;
+        int size;
     
 } MyStack;
 
-MyStack* myStackCreate() {
-    MyStack *result = (MyStack *)malloc(sizeof(MyStack));
-    result->top = (int *)malloc(1000*sizeof(int));
-    result->index = -1;
-    return result;
+MyStack *myStackCreate()
+{
+    MyStack *s = (MyStack *)malloc(sizeof( MyStack));
+    s->f = s->r =-1;
+    s->size = 1000;
+    s->arr = (int *)malloc(s->size*(sizeof(int)));
+    return s;
 }
-
-void myStackPush(MyStack* obj, int x) {
-    obj->index++;
-    obj->top[obj->index] = x;  
+void myStackPush(MyStack* obj,int x)
+{
+     
+    
+     obj->f++;
+     obj->arr[obj->f] = x;
 }
-
-
-int myStackPop(MyStack* obj) {
-   return obj->top[obj->index--];
+int myStackPop(MyStack* obj)
+{
+    
+    
+     
+     return obj->arr[obj->f--];
 }
-
-int myStackTop(MyStack* obj) {
-   return obj->top[obj->index];
+int myStackTop(MyStack* obj)
+{
+     
+    
+     
+     return obj->arr[obj->f];
 }
-
-bool myStackEmpty(MyStack* obj) {
-      if(obj->index < 0) return true;
-      else return false;
+bool myStackEmpty(MyStack* obj)
+{
+     
+    
+     
+     if(obj->r == obj->f)
+     {
+         return true;
+     }
+    return false;
 }
-
 void myStackFree(MyStack* obj) {
-        free(obj->top);
+        free(obj->arr);
         free(obj);
 }
+
+
